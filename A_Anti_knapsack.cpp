@@ -14,6 +14,21 @@ void read(vector<T>& a) {
 
 void Solve() {
     // Convert your toughts into code here.
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        int n, k;
+        cin >> n >> k;
+        vector<int> ans;
+        for (int i = k + 1; i <= n; i++) ans.push_back(i);
+        for (int i = ((k + 1) / 2); i < k; i++) ans.push_back(i);
+
+        cout << ans.size() << "\n";
+        if (ans.size()) {
+            for (auto c : ans) cout << c << " ";
+            cout << "\n";
+        }
+    }
 }
 
 int main() {

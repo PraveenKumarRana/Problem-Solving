@@ -5,15 +5,20 @@ using namespace std;
 #define ll long long int
 #define all(x) x.begin(), x.end()
 
-const int mod = 1e9 + 7;
-
-template <typename T>
-void read(vector<T>& a) {
-    for (auto& it : a) cin >> it;
-}
-
 void Solve() {
-    // Convert your toughts into code here.
+    // Your code goes here.
+    ll n;
+    cin >> n;
+    while (n != 1) {
+        cout << n << " ";
+        if (n % 2 == 0)
+            n /= 2;
+        else {
+            n *= 3;
+            n += 1;
+        }
+    }
+    cout << n << "\n";
 }
 
 int main() {

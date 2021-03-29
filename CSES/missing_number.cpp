@@ -5,15 +5,19 @@ using namespace std;
 #define ll long long int
 #define all(x) x.begin(), x.end()
 
-const int mod = 1e9 + 7;
-
-template <typename T>
-void read(vector<T>& a) {
-    for (auto& it : a) cin >> it;
-}
-
 void Solve() {
-    // Convert your toughts into code here.
+    // Your code goes here.
+    int n;
+    cin >> n;
+    int ans = 1;
+    for (int i = 2; i <= n; i++) ans ^= i;
+    for (int i = 1; i < n; i++) {
+        int x;
+        cin >> x;
+        ans ^= x;
+    }
+
+    cout << ans << "\n";
 }
 
 int main() {
