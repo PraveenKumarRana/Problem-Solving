@@ -8,20 +8,31 @@ using namespace std;
 #define ll long long int
 #define all(x) x.begin(), x.end()
 
+bool found(string &v, string s) {
+    int i = 0;
+    for (int j = 0; j < v.size(); j++) {
+        if (i < s.size() && s[i] == v[j]) {
+            i++;
+        }
+    }
+
+    return i == (int)s.size();
+}
+
 void Solve() {
     // Your code goes here.
-    int n;
-    cin >> n;
-    if (n <= 3 && n > 1)
-        cout << "NO SOLUTION" << nl;
-    else {
-        for (int i = 2; i <= n; i += 2) {
-            cout << i << " ";
+    string v;
+    cin >> v;
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        string s;
+        cin >> s;
+        if (found(v, s)) {
+            cout << "POSITIVE" << nl;
+        } else {
+            cout << "NEGATIVE" << nl;
         }
-        for (int i = 1; i <= n; i += 2) {
-            cout << i << " ";
-        }
-        cout << nl;
     }
 }
 
