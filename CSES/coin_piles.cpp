@@ -10,7 +10,19 @@ using namespace std;
 
 void Solve() {
     // Your code goes here.
-    
+    ll tt;
+    cin >> tt;
+    while (tt--) {
+        ll a, b;
+        cin >> a >> b;
+
+        if ((2 * a - b) % 3 == 0 && (2 * a - b) >= 0 && (2 * b - a) % 3 == 0 &&
+            (a + b) % 3 == 0 && (2 * b - a) >= 0) {
+            cout << "YES" << nl;
+        } else {
+            cout << "NO" << nl;
+        }
+    }
 }
 
 int main() {

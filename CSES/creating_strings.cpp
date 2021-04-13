@@ -10,7 +10,17 @@ using namespace std;
 
 void Solve() {
     // Your code goes here.
-    
+    string s;
+    cin >> s;
+    sort(all(s));
+
+    vector<string> a;
+    do {
+        a.push_back(s);
+    } while (next_permutation(all(s)));
+
+    cout << a.size() << nl;
+    for (auto c : a) cout << c << nl;
 }
 
 int main() {

@@ -8,9 +8,27 @@ using namespace std;
 #define ll long long int
 #define all(x) x.begin(), x.end()
 
+ll sum(ll n) {
+    ll s = 0;
+    while (n > 0) {
+        s += n % 10;
+        n /= 10;
+    }
+    return s;
+}
+
 void Solve() {
     // Your code goes here.
-    
+    ll tt;
+    cin >> tt;
+    while (tt--) {
+        ll n;
+        cin >> n;
+        while (gcd(n, sum(n)) == 1) {
+            n++;
+        }
+        cout << n << nl;
+    }
 }
 
 int main() {

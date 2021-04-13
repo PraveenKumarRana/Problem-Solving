@@ -25,11 +25,20 @@ void Solve() {
 
         if (sum == 0) {
             cout << "YES" << nl;
-            for (ll i = 1; i <= n; i++)
+            int cnt = 0;
+            for (ll i = 1; i <= n; i++) {
+                if (used[i]) cnt++;
+            }
+
+            cout << cnt << nl;
+            for (ll i = 1; i <= n; i++) {
                 if (used[i]) cout << i << " ";
+            }
             cout << nl;
-            for (ll i = 1; i <= n; i++)
+            cout << n - cnt << nl;
+            for (ll i = 1; i <= n; i++) {
                 if (!used[i]) cout << i << " ";
+            }
             cout << nl;
         } else {
             cout << "NO" << nl;

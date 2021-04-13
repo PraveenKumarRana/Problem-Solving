@@ -10,7 +10,22 @@ using namespace std;
 
 void Solve() {
     // Your code goes here.
-    
+    int n;
+    cin >> n;
+    vi a(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+
+    sort(all(a));
+    int v = 0;
+    int cnt = 0;
+    for (int i = 0; i < n; i++) {
+        if (v != a[i]) {
+            v = a[i];
+            cnt++;
+        }
+    }
+
+    cout << cnt << nl;
 }
 
 int main() {
