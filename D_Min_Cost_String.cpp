@@ -2,36 +2,40 @@
 #pragma GCC optimize("Ofast")
 using namespace std;
 
-#define nl "\n"
-#define vi vector<int>
-#define pi pair<int, int>
-#define ll long long int
-#define all(x) x.begin(), x.end()
-
-map<string, int> cnt;
-
-void Solve() {
-    // Your code goes here.
-    int n, k;
-    cin >> n >> k;
-    string s = "abcdefghijklmnopqrstuvwxyz";
-    reverse(all(s));
-
-    // string ans = "a";
-    // for (int i = 1; i < n; i++) {
-    //     string p = "";
-    //     p += ans[i - 1];
-    //     p += x;
-    //     ans = ans + x;
-    //     cnt[p]++;
-    // }
-
-    cout << s << nl;
-}
-
 int main() {
-    std::ios_base::sync_with_stdio(false);
-    cin.tie(0), cout.tie(0);
-    Solve();
+    int strlen;
+    cin >> strlen;
+
+    int n;
+    cin >> n;
+    vector<vector<int>> g(n, vector<int>(n, 1));
+
+    vector<int> deg(n);
+
+    int first = 0;
+    stack<int> st;
+    st.push(first);
+    vector<int> res;
+    while (!st.empty() && (int)res.size() < (strlen + 10)) {
+        int v = st.top();
+        int i;
+        for (i = 0; i < n; ++i)
+            if (g[v][i]) break;
+        if (i == n) {
+            res.push_back(v);
+            st.pop();
+        } else {
+            --g[v][i];
+            st.push(i);
+        }
+    }
+
+    res.pop_back();
+
+    for (int i = 0; i < strlen; i++) {
+        cout << (char)('a' + res[i % (int)(res.size())]);
+    }
+    cout << "\n";
+
     return 0;
 }
