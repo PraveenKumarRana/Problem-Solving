@@ -28,36 +28,26 @@ int main() {
         int a, b, k;
         cin >> a >> b >> k;
 
-        if (k > 60) {
-            cout << "NO"
+        int m = 0;
+        if (a == b) {
+            m = 0;
+        } else if (gcd(a, b) == a || gcd(a, b) == b) {
+            m = 1;
+        } else {
+            m = 2;
+        }
+
+        int n = fact(a) + fact(b);
+
+        if (k >= m && k <= n && k == 1 && m == 1) {
+            cout << "YES"
+                 << "\n";
+        } else if (k >= m && k <= n && k > 1) {
+            cout << "YES"
                  << "\n";
         } else {
-            int mn = 0;
-            if (a == b) {
-                mn = 2;
-            } else {
-                if (a % b == 0 or b % a == 0) {
-                    mn = 1;
-                } else {
-                    mn = 2;
-                }
-            }
-
-            int g = gcd(a, b);
-            a /= g, b /= g;
-
-            int mx = 0;
-            mx += fact(a);
-            mx += fact(b);
-            mx += fact(g);
-
-            if (k >= mn && k <= mx) {
-                cout << "YES"
-                     << "\n";
-            } else {
-                cout << "NO"
-                     << "\n";
-            }
+            cout << "NO"
+                 << "\n";
         }
     }
     return 0;

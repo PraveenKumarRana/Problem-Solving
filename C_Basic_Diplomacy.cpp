@@ -11,40 +11,42 @@ int main() {
     while (tt--) {
         int n, m;
         cin >> n >> m;
-        map<int, int> mp;
-
-        vector<int> ans(m, -1);
-
-        int k;
-        cin >> k;
-        for (int i = 0; i < k; i++) {
+        set<int> frnd[m];
+        for (int i = 0; i < m; i++) {
             int x;
             cin >> x;
-            x--;
-            ans[x] = 0;
-            mp[0]++;
+            for (int j = 0; j < x; j++) {
+                int f;
+                cin >> f;
+                f--;
+                frnd[i].insert(f);
+            }
         }
 
-        for (int i = 1; i < m; i++) {
-            cin >> k;
-            for (int j = 0; j < k; j++) {
-                int x;
-                cin >> x;
-                x--;
-                if (ans[x] >= 0 && mp[ans[x]] > ((m + 1) / 2)) {
-                    mp[ans[x]]--;
-                    ans[x] = i;
-                    mp[ans[x]]++;
-                } else {
-                    ans[x] = i;
+        vector<int> ans(m, 0);
+        map<int, int> cnt;
+        for (int i = 0; i < m; i++) {
+            ans[i] = *frnd[i].begin();
+            frnd[i].erase(frnd[i].begin());
+            cnt[ans[i]]++;
+        }
+
+        for (int i = 0; i < m; i++) {
+            if (cnt[ans[i]] > ((m + 1) / 2)) {
+                if (frnd[i].size()) {
+                    cnt[ans[i]]--;
+                    ans[i] = *frnd[i].begin();
+                    frnd[i].erase(frnd[i].begin());
+                    cnt[ans[i]]++;
                 }
             }
         }
 
         bool ok = true;
         for (int i = 0; i < m; i++) {
-            if (mp[i] > ((n + 1) / 2)) {
+            if (cnt[ans[i]] > ((m + 1) / 2)) {
                 ok = false;
+                break;
             }
         }
 
