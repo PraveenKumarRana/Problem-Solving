@@ -1,88 +1,53 @@
-// author: @iamyours
-
 #include <bits/stdc++.h>
 #pragma GCC optimize("Ofast")
 using namespace std;
 
-class Solve{
-    public:
-    void solve();
-    
-    template<typename T>
-    void read(vector<T> &a){
-        for(auto &it: a) cin>>it;
-    }
-};
-
-
-
-void Solve() {
-    // Convert your toughts into code here.
-    int n; cin>>n;
-    string s; cin>>s;
-    
-    stack<pair<char, int>> st;
-    for(int i=0; i<n; i++){
-        if(!st.empty() && st.top().first==s[i]){
-            pair<char,int> cnt = st.top();
-            st.pop();
-            st.push({s[i], cnt.second+1});
-        }else{
-            st.push({s[i], 1});
-        }
-    }
-
-    vector<pair<char,int>> input;
-    while(!st.empty()){
-        input.push_back(st.top());
-        st.pop();
-    }
-
-    while(input.size()>0){
-        bool ok = false;
-        for(auto c: input){
-            cout<<c.first<<" ";
-        }
-        cout<<NL;
-        for(auto c: input){
-            cout<<c.second<<" ";
-        }
-        cout<<NL;
-
-        for(int i=0; i<input.size()-1; i++){
-            if((input[i+1].first-input[i].first)==1){
-                int sum = input[i+1].second + input[i].second - 1;
-                sum -= input[i].second;
-                input[i+1].second-=sum;
-                input.erase(input.begin()+i);
-                ok = true;
-                break;
-            }
-            else if((input[i+1].first-input[i].first)==-1){
-                int sum = input[i+1].second + input[i].second - 1;
-                sum -= input[i+1].second;
-                input[i].second-=sum;
-                input.erase(input.begin()+(i+1));
-                ok = true;
-                break;
-            }
-        }
-        if(!ok){
-            break;
-        }
-    }
-
-    int cnt = 0;
-    for(auto c: input){
-        cnt+=c.second;
-    }
-
-    cout<<n-cnt<<NL;
-}
-
-int32_t main() {
+int main() {
     std::ios_base::sync_with_stdio(false);
-    cin.tie(0), cout.tie(0);
-    Solve();
+    // Your code goes here.
+
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    int presize = s.size();
+
+    while (true) {
+        for (int k = 0; k < n; k++) {
+            for (int i = 1; i < s.size(); i++) {
+                if ((s[i - 1] - 'a' + 1) == (s[i] - 'a')) {
+                    int j = i;
+                    while (j < s.size() &&
+                           (s[j - 1] - 'a' + 1) == (s[j] - 'a')) {
+                        j++;
+                    }
+                    j--;
+                    s.erase(s.begin() + j);
+                    break;
+                }
+            }
+        }
+
+        // cout << s << "\n";
+
+        for (int k = 0; k < n; k++) {
+            for (int i = 1; i < s.size(); i++) {
+                if ((s[i - 1] - 'a') == (s[i] - 'a' + 1)) {
+                    s.erase(s.begin() + i - 1);
+                    break;
+                }
+            }
+        }
+
+        if (presize == s.size()) {
+            break;
+        } else {
+            presize = s.size();
+        }
+    }
+
+    cout << n - (int)s.size() << "\n";
+
     return 0;
 }
