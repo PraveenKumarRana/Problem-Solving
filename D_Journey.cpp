@@ -1,5 +1,5 @@
 // Author: Praveen Kumar Rana
-// Date: 03-07-2021 (17:57:49)
+// Date: 16-07-2021 (07:02:25)
 
 #include <bits/stdc++.h>
 #pragma GCC optimize("Ofast")
@@ -17,30 +17,35 @@ void solve() {
     while (t--) {
         int n;
         cin >> n;
+        vector<int> left(n + 1, 0), right(n + 1, 0);
         string s;
         cin >> s;
 
-        vector<int> lr(n, 1), rl(n, 1);
-
-        for (int i = 1; i < n; i++) {
-            if (s[i - 1] != s[i]) {
-                lr[i] += lr[i - 1];
-            } else {
-                lr[i] = 1;
+        if (s[0] == 'L') left[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            if (s[i - 1] == 'L') {
+                if (s[i - 2] == 'R') {
+                    left[i] = left[i - 2] + 2;
+                } else {
+                    left[i] = 1;
+                }
             }
         }
 
+        if (s[n - 1] == 'R') right[n - 1] = 1;
         for (int i = n - 2; i >= 0; i--) {
-            if (s[i - 1] != s[i]) {
-                rl[i] += rl[i + 1];
-            } else {
-                rl[i] = 1;
+            if (s[i] == 'R') {
+                if (s[i + 1] == 'L') {
+                    right[i] = right[i + 2] + 2;
+                } else {
+                    right[i] = 1;
+                }
             }
         }
 
-        for (auto c : lr) cout << c << " ";
-        cout << NL;
-        for (auto c : rl) cout << c << " ";
+        for (int i = 0; i <= n; i++) {
+            cout << left[i] + right[i] + 1 << " ";
+        }
         cout << NL;
     }
 }

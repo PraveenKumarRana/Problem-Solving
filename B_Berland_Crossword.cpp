@@ -1,132 +1,51 @@
+// Author: Praveen Kumar Rana
+// Date: 09-08-2021 (21:19:56)
+
 #include <bits/stdc++.h>
 #pragma GCC optimize("Ofast")
 using namespace std;
 
-#define nl "\n"
-#define vi vector<int>
-#define pi pair<int, int>
-#define ll long long int
+#define NL "\n"
+#define int long long int
 #define all(x) x.begin(), x.end()
+const int mod = 1e9 + 7;
 
-void Solve() {
-    // Your code goes here.
-    int tt;
-    cin >> tt;
-    while (tt--) {
-        int n, u, r, d, l;
-        cin >> n >> u >> r >> d >> l;
+void solve() {
+    // Write your code here.
+    int t; cin>>t;
+    while(t--){
+        int n, u, r, d, l; cin>>n>>u>>r>>d>>l;
 
-        if (u > (n - 2)) {
-            u--;
-            bool ok = false;
-            if (l >= 1) {
-                l--;
-                ok = true;
-            } else
-                r--;
-            for (int i = 2; i < n; i++) {
-                if (u > 0) {
-                    u--;
+        bool ok = false;
+        for(int i=0; i<=1; i++){
+            for(int j=0; j<=1; j++){
+                for(int k=0; k<=1; k++){
+                    for(int m=0; m<=1; m++){
+                        int uu=u, rr=r, dd=d, ll=l;
+                        if(i==1) uu--, ll--;
+                        if(j==1) uu--, rr--;
+                        if(k==1) dd--, ll--;
+                        if(m==1) dd--, rr--;
+
+                        if(uu>=0 && uu<=(n-2) && ll>=0 && ll<=(n-2) && rr>=0 && rr<=(n-2) && dd>=0 && dd<=(n-2)){
+                            ok = true;
+                        }
+                    }
                 }
-            }
-            if (u > 0) {
-                u--;
-                if (ok)
-                    r--;
-                else
-                    l--;
-            }
-
-        } else {
-            u = 0;
+            }   
         }
 
-        if (d > (n - 2)) {
-            d--;
-            bool ok = false;
-            if (l >= 1) {
-                l--;
-                ok = true;
-            } else
-                r--;
-            for (int i = 2; i < n; i++) {
-                if (d > 0) {
-                    d--;
-                }
-            }
-            if (d > 0) {
-                d--;
-                if (ok)
-                    r--;
-                else
-                    l--;
-            }
-        } else {
-            d = 0;
-        }
-
-        if (l > (n - 2)) {
-            l--;
-            bool ok = false;
-            if (d >= 1) {
-                d--;
-                ok = true;
-            } else
-                u--;
-            for (int i = 2; i < n; i++) {
-                if (l > 0) {
-                    l--;
-                }
-            }
-
-            if (l > 0) {
-                l--;
-                if (ok)
-                    u--;
-                else
-                    d--;
-            }
-
-        } else {
-            l = 0;
-        }
-
-        if (r > (n - 2)) {
-            r--;
-            bool ok = false;
-            if (d >= 1) {
-                d--;
-                ok = true;
-            } else
-                u--;
-            for (int i = 2; i < n; i++) {
-                if (r > 0) {
-                    r--;
-                }
-            }
-
-            if (r > 0) {
-                r--;
-                if (ok)
-                    u--;
-                else
-                    d--;
-            }
-        } else {
-            r = 0;
-        }
-
-        if (u == 0 && d == 0 && l == 0 && r == 0) {
-            cout << "YES" << nl;
-        } else {
-            cout << "NO" << nl;
+        if(ok){
+            cout<<"YES"<<NL;
+        }else{
+            cout<<"NO"<<NL;
         }
     }
 }
 
-int main() {
+int32_t main() {
     std::ios_base::sync_with_stdio(false);
     cin.tie(0), cout.tie(0);
-    Solve();
+    solve();
     return 0;
 }
